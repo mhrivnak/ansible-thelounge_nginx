@@ -1,0 +1,15 @@
+# only configure nginx when the certificate exists. Otherwise errors occur when
+# the handler restarts nginx.
+- name: check if certs exist
+  stat:
+    path: /etc/letsencrypt/live/{{ thelounge_fqdn }}/fullchain.pem
+  register: certfile
+
+- name: render nginx config
+  template:
+    src: thelounge.conf.j2
+    dest: /etc/nginx/conf.d/thelounge.conf
+    mode: "0640"
+  when: certfile.stat.exists
+  notify:
+    - restart nginx
