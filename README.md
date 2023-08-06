@@ -1,5 +1,5 @@
-Role Name
-=========
+thelounge_nginx
+===============
 
 Exposes The Lounge IRC webapp using nginx as a reverse proxy and [Let's
 Encrypt](https://letsencrypt.org/) for TLS certs. This role assumes that The
